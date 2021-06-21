@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue源码剖析</title>
+    <script src="../../dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <h1>虚拟DOM</h1>
+        <div>
+            <p v-for="a in arr" :key="a">{{a}}</p>
+        </div>
+    </div>
+    <script>
+        // 创建实例
+        const app = new Vue({
+            el: '#demo',
+            data: { arr: [1,2,3] },
+            mounted() {
+                setTimeout(() => {
+                    this.arr.splice(1,0,4)
+                }, 1000);
+            }
+        });
+
+        // 不加key
+        // [1,2,3]
+        // [1,4,2,3]
+
+        // [2,3]
+        // [4,2,3]
+
+        // ...
+        // 两次额外更新
+
+        // 加key
+        // [1,2,3]
+        // [1,4,2,3]
+
+        // [2,3]
+        // [4,2,3]
+
+        // [2]
+        // [4,2]
+
+        // []
+        // [4]
+
+        // 创建4，插入4
+    </script>
+</body>
+
+</html>
