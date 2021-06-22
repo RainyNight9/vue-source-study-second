@@ -29,12 +29,15 @@ export function initMixin (Vue: Class<Component>) {
     // a flag to avoid this being observed
     vm._isVue = true
     // merge options
+    // 1.合并选项
+     // user options + system options
     if (options && options._isComponent) {
       // optimize internal component instantiation
       // since dynamic options merging is pretty slow, and none of the
       // internal component options needs special treatment.
       initInternalComponent(vm, options)
     } else {
+      // this.$options
       vm.$options = mergeOptions(
         resolveConstructorOptions(vm.constructor),
         options || {},
@@ -48,14 +51,20 @@ export function initMixin (Vue: Class<Component>) {
       vm._renderProxy = vm
     }
     // expose real self
+     // 初始化过程
     vm._self = vm
-    initLifecycle(vm)
-    initEvents(vm)
-    initRender(vm)
+    initLifecycle(vm) // $parent,$root,$children,$refs
+    // <comp @myclick="xxx"></comp>
+    // 处理父组件传递的事件和回调
+     // 自定义事件监听
+    initEvents(vm) 
+    // $slots,$scopedSlots,_c,$createElement
+    // 插槽解析，_c()/$createElement()
+    initRender(vm) 
     callHook(vm, 'beforeCreate')
-    initInjections(vm) // resolve injections before data/props
-    initState(vm)
-    initProvide(vm) // resolve provide after data/props
+    initInjections(vm) // 获取注入数据 // resolve injections before data/props
+    initState(vm) // 初始化props，methods，data，computed，watch
+    initProvide(vm) // 提供数据注入 // resolve provide after data/props
     callHook(vm, 'created')
 
     /* istanbul ignore if */
@@ -65,6 +74,7 @@ export function initMixin (Vue: Class<Component>) {
       measure(`vue ${vm._name} init`, startTag, endTag)
     }
 
+    // 如果设置了el选项，自动执行$mount
     if (vm.$options.el) {
       vm.$mount(vm.$options.el)
     }

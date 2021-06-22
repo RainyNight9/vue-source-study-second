@@ -6,6 +6,7 @@ import { initMixin } from './mixin'
 import { initExtend } from './extend'
 import { initAssetRegisters } from './assets'
 import { set, del } from '../observer/index'
+// ['component', 'filter', 'directive']
 import { ASSET_TYPES } from 'shared/constants'
 import builtInComponents from '../components/index'
 import { observe } from 'core/observer/index'
@@ -62,8 +63,8 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 
   extend(Vue.options.components, builtInComponents)
 
-  initUse(Vue)
-  initMixin(Vue)
-  initExtend(Vue)
-  initAssetRegisters(Vue)
+  initUse(Vue) // 实现Vue.use函数
+  initMixin(Vue) // 实现Vue.mixin函数
+  initExtend(Vue)  // 实现Vue.extend函数
+  initAssetRegisters(Vue) // 注册实现Vue.component/directive/filter
 }

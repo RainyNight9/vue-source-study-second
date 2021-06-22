@@ -1,5 +1,7 @@
 /* @flow */
 
+// 安装web平台特有指令和组件
+
 import Vue from 'core/index'
 import config from 'core/config'
 import { extend, noop } from 'shared/util'
@@ -31,9 +33,15 @@ extend(Vue.options.directives, platformDirectives)
 extend(Vue.options.components, platformComponents)
 
 // install platform patch function
+// 1.设置一个patch函数：
+// init vdom => dom
+// update vdom diff => dom operation
+// 定义__patch__：补丁函数，执行patching算法进行更新
 Vue.prototype.__patch__ = inBrowser ? patch : noop
 
 // public mount method
+// 2.实现了$mount方法
+// 定义$mount：挂载vue实例到指定宿主元素（获得dom并替换宿主元素）
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean

@@ -121,9 +121,9 @@ const builds = {
   },
   // Runtime+compiler development build (Browser)
   'web-full-dev': {
-    entry: resolve('web/entry-runtime-with-compiler.js'),
-    dest: resolve('dist/vue.js'),
-    format: 'umd',
+    entry: resolve('web/entry-runtime-with-compiler.js'), // 入口
+    dest: resolve('dist/vue.js'), // 目标文件
+    format: 'umd', // 输出规范
     env: 'development',
     alias: { he: './entity-decoder' },
     banner
