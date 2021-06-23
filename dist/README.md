@@ -1,3 +1,13 @@
+# 这个文件夹是 项目构建后的文件
+
+>runtime：仅包含运行时，不包含编译器
+
+>common：cjs规范，用于webpack1
+
+>esm：ES模块，用于webpack2+
+
+>umd: universal module definition，兼容cjs和amd，用于浏览器
+
 ## Explanation of Build Files
 
 | | UMD | CommonJS | ES Module |
